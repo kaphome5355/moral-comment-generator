@@ -1,0 +1,6 @@
+{
+  "name": "Copy of Copy of 小学校道徳所見ジェネレーター",
+  "description": "小学校の道徳の授業における児童の所見を、選択した価値項目とキーワードに基づいてAIが自動生成するアプリケーションです。全学年対応。",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
