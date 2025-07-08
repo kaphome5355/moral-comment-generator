@@ -4,7 +4,7 @@
   "description": "小学校の道徳の授業における児童の所見を、選択した価値項目とキーワードに基づいてAIが自動生成するアプリケーションです。全学年対応。",
   "private": true,
   "scripts": {
-    "build": "echo \"Dependencies installed via netlify.toml\""
+    "build": "echo 'Build script to trigger Netlify dependency installation'"
   },
   "dependencies": {
     "@google/genai": "^1.8.0",
