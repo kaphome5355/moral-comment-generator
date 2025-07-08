@@ -1,6 +1,6 @@
 
 import type { Handler } from "@netlify/functions";
-import { GoogleGenAI, GenerateContentResponse, Content } from "@google/genai";
+import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
 const API_KEY = process.env.API_KEY;
 
@@ -180,10 +180,9 @@ ${keywordsPromptPart}
 所見:
 `;
 
-    const contents: Content[] = [{ role: "user", parts: [{ text: prompt }] }];
     const response: GenerateContentResponse = await ai.models.generateContent({
         model: MODEL_NAME,
-        contents: contents,
+        contents: prompt,
     });
     
     const text = response.text;

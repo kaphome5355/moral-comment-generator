@@ -23,7 +23,8 @@ export const generateMoralComment = async (valueItem: string, keywords: string[]
   } catch (error) {
     console.error("Error calling Netlify function:", error);
     if (error instanceof Error) {
-      throw new Error(`所見の生成に失敗しました: ${error.message}`);
+      // Netlify functionからのエラーメッセージを優先的に表示
+      throw new Error(error.message.startsWith('所見の生成に失敗しました:') ? error.message : `所見の生成に失敗しました: ${error.message}`);
     }
     throw new Error("所見の生成中に不明なエラーが発生しました。");
   }

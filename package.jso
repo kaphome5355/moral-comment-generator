@@ -1,0 +1,10 @@
+{
+  "name": "copy-of-copy-of-shogakko-dotoku-shoken-generator",
+  "version": "1.0.0",
+  "description": "小学校の道徳の授業における児童の所見を、選択した価値項目とキーワードに基づいてAIが自動生成するアプリケーションです。全学年対応。",
+  "private": true,
+  "dependencies": {
+    "@google/genai": "^1.8.0",
+    "@netlify/functions": "^4.1.9"
+  }
+}
