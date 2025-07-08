@@ -1,4 +1,3 @@
-
 export const generateMoralComment = async (valueItem: string, keywords: string[]): Promise<string> => {
   try {
     const response = await fetch('/.netlify/functions/generate-comment', {
@@ -9,12 +8,13 @@ export const generateMoralComment = async (valueItem: string, keywords: string[]
       body: JSON.stringify({ valueItem, keywords }),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ error: 'サーバーからの応答が不正です。' }));
-      throw new Error(errorData.error || `サーバーエラーが発生しました (ステータス: ${response.status})`);
+      // サーバーからのエラーメッセージ（data.error）を使用してエラーをスロー
+      throw new Error(data.error || `サーバーエラーが発生しました (ステータス: ${response.status})`);
     }
 
-    const data = await response.json();
     if (data.comment) {
       return data.comment;
     } else {
@@ -22,10 +22,8 @@ export const generateMoralComment = async (valueItem: string, keywords: string[]
     }
   } catch (error) {
     console.error("Error calling Netlify function:", error);
-    if (error instanceof Error) {
-      // Netlify functionからのエラーメッセージを優先的に表示
-      throw new Error(error.message.startsWith('所見の生成に失敗しました:') ? error.message : `所見の生成に失敗しました: ${error.message}`);
-    }
-    throw new Error("所見の生成中に不明なエラーが発生しました。");
+    const message = error instanceof Error ? error.message : "不明なエラーが発生しました。";
+    // UIに表示するエラーメッセージを一貫させるため、ここで接頭辞を追加します。
+    throw new Error(`所見の生成に失敗しました: ${message}`);
   }
 };
